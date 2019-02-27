@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-<title>@yield('title', 'LaraBBS') - Laravel 进阶教程</title>
-<meta name="description" content="@yield('description', 'LaraBBS 爱好者社区')" />
+@section('title', $topic->title)
 @section('description', $topic->excerpt)
 
 @section('content')
@@ -27,7 +26,7 @@
     </div>
 
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 topic-content">
-      <div class="card ">
+      <div class="card">
         <div class="card-body">
           <h1 class="text-center mt-3 mb-3">
             {{ $topic->title }}
@@ -64,6 +63,15 @@
 
         </div>
       </div>
+
+      {{-- 用户回复列表 --}}
+      <div class="card topic-reply mt-4">
+        <div class="card-body">
+          @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
+          @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
+        </div>
+      </div>
+
     </div>
   </div>
 @stop
