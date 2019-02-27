@@ -13,9 +13,9 @@
 
             {{-- 回复删除按钮 --}}
             <span class="meta float-right" title="{{ $notification->created_at }}">
-        <i class="far fa-clock"></i>
-        {{ $notification->created_at->diffForHumans() }}
-      </span>
+                <i class="far fa-clock"></i>
+                {{ $notification->created_at->diffForHumans() }}
+              </span>
         </div>
         <div class="reply-content">
             {!! $notification->data['reply_content'] !!}
